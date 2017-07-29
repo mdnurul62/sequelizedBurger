@@ -1,0 +1,2 @@
+# sequelizedBurger
+Burger application.
