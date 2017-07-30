@@ -1,0 +1,21 @@
+body {
+  text-align: center;
+}
+
+.image {
+  margin: auto;
+}
+
+li {
+  display: block;
+  text-align: center;
+  font-size: 50px;
+}
+
+.devoured-list {
+  font-style: italic;
+}
+
+button {
+  font-size: 25px;
+}
