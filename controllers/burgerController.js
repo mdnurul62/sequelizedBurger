@@ -1,59 +1,57 @@
-//require express
-var express = require("express");
 
-//set the express function equal to the app variable
-var app = express();
+//Import models
+var db = require("../models");
+var path = require("path");
 
-//require the index.js file
-var models = require("../models");
-var db = require("../models/index.js");
-var burgers = require("../models/burger.js");
-
-//require the connection file
-var connection = require("../config/config.json");
-
-//export the routes to be accessed later
 module.exports = function(app) {
-	app.get("/", function(req, res) {
-		res.redirect("/burgers");
-	});
-
-    //route to get the data and return an html page
-    app.get("/", function(req, res) {
-        models.burger.findAll({
-
-        }).then(function(data) {
-            res.render("burger/index");
-        });
+  
+  app.get("/", function(req, res) {
+    // Finding all-added burgers in the db
+    db.Burgers.findAll({}).then(function(burgersInDb) {
+      res.render("index", {burgers: burgersInDb});
+      //res.json(burgersInDb);
     });
+  });
 
-    //A query which adds a new burger based on the userInput to the database
-    app.post("/create", function(req, res) {
-        models.burger.create({
-        	burger_name: req.body.burger_name
-        }).then(function() {
-            res.redirect("/burgers");
-        });
-
+  app.get("/api/burgers", function(req, res) {
+    // GET arbitrarily any buger by id
+    db.Burgers.findAll({}).then(function(foundAllBurgers) {
+      res.json(foundAllBurgers);
     });
+  });
 
-    //a query that updates the burger devour value to true
-    app.put("/burger/update/:id", function(req, res) {
-        models.burger.update({
-        	WHERE: {id: req.params.id}
-        }).then(function() {
+  app.get("/api/burgers/:id", function(req, res) {
+    // GET arbitrarily any buger by id
+    db.Burgers.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(foundBurger) {
+      res.json(foundBurger);
+    });
+  });
 
-            res.redirect("/burgers");
-        });
+  app.post("/api/create", function(req, res) {
+    //npm package body-parser to access Burger model properties.
+    db.Burgers.create({
+      burger_name: req.body.burger_name,
+      devoured: req.body.devour
+    }).then(function(createdBurger) {
+      res.redirect("/");
     });
-    //to destroy/truncate
-    app.delete("/burgers/delete", function(req, res) {
-    	models.burger.truncate({
-    		WHERE: {
-    			id: req.params.id
-    		}
-    	}).then(function() {
-    		res.redirect("/burgers");
-    	})
-    });
+  });
+
+  app.post("/api/update", function(req, res) {
+    console.log("the id is: "+ req.body.burger_id[0]);
+    db.Burgers.update({
+      devoured: true
+      },
+      {
+        where: {
+          id: req.body.burger_id
+        }
+      }).then(function(updatedResult) {
+        res.redirect("/");
+      });
+  });
 };

@@ -1,38 +1,38 @@
-//Dependencies 
+//This file is the initial starting point for the Node/Express server.
+// Dependencies
+// =============================================================
 var express = require("express");
-var exprhbs = require("express-handlebars");
 var bodyParser = require("body-parser");
-var methodOverride = require("method-override");
+var exphbs = require("express-handlebars");
 
-// Initialize Express
+// Sets up the Express App
+// =============================================================
 var app = express();
 var PORT = process.env.PORT || 8080;
 
-//require all the models to sync in the database
+// Require models for syncronization
 var db = require("./models");
+
+//Handlebars setup as the default templating engine.
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-//override the method middleware
-app.use(methodOverride("_method"));
+// Static directory
+var path = require("path");
+app.use(express.static(path.join(__dirname + "../public")));
 
-//require handlebars
-app.engine("handlebars", exprhbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
-//require the routes
+// Import routes and to access server.
 require("./controllers/burgerController.js")(app);
 
-// Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static("./devour"));
-
-// Syncing our sequelize models and then listen to the port
-db.sequelize.sync().then(function() {
-    app.listen(PORT, function() {
-        console.log("App listening on PORT 8000 ||" + PORT);
-    });
+// Syncronizing sequelize models and then starting our express app
+db.sequelize.sync({ force: true }).then(function() {
+  app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
 });

@@ -1,0 +1,33 @@
+{
+  "name": "sequelizedburger",
+  "version": "1.0.0",
+  "description": "Burger application.",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.10",
+    "method-override": "^2.3.9",
+    "mysql": "^2.14.0",
+    "mysql2": "^1.3.6",
+    "path": "^0.12.7",
+    "sequelize": "^4.4.2",
+    "sequelize-cli": "^2.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdnurul62/sequelizedBurger.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdnurul62/sequelizedBurger/issues"
+  },
+  "homepage": "https://github.com/mdnurul62/sequelizedBurger#readme"
+}
