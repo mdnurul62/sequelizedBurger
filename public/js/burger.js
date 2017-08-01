@@ -17,11 +17,11 @@ var burger = {
         this.bindEvents();
     },
     cacheDom: function () {
-        this.$body = $("#body");
+        this.$displayDiv = $("#displayDiv");
         this.$burgerName = $("#burgerName");
         this.$submitBtn = $("#submitBtn");
         this.$uneatenBurger = $("#uneatenBurger");
-        this.$btns = $("#btns");
+        this.$btn = $("#btns");
         this.$eatenBurger = $("#eatenBurger");
     },
     bindEvents: function () {
@@ -30,12 +30,12 @@ var burger = {
         $(document).on("click", ".devBtn", this.updateBurger);
     }, 
     renderHide: function () {
-        this.$body.hide();
+        this.$displayDiv.hide();
     },
     renderShow: function () {
-        this.$body.show();
+        this.$displayDiv.show();
     },
-    //submits a new post to the db
+    //create a new burger to the db
     createBurger: function() {
         newBurger.burger_name = this.$burgerName.val().trim();
         //ajax post call with path url and newBurger data entered by user.
@@ -44,32 +44,34 @@ var burger = {
                 counter++;
                 //dynamically appending newly added burger.
                 var newDiv = $("<div>");
-                newDiv.addClass("col-sm-4 well");
+                newDiv.addClass("col-sm-4 well ");
                 newDiv.append("<p>" + newBurger.burger_name + " </p>");
                 newDiv.attr("id", counter);
-                burger.$burgers.append(newDiv);
+                burger.$uneatenBurger.append(newDiv);
+
                 //dynamically appending devour buttons.
                 var devourBtn = $("<button>Devour</button>");
                 devourBtn.addClass("btn btn-md btn-danger devBtn");
                 devourBtn.attr("value", counter);
-                burger.$btns.append(devourBtn);
+                burger.$btn.append(devourBtn);
         });
         this.$burgerName.val("");
         this.renderShow();
     }, 
     
-    eatenBurger: function() {
+    updateBurger: function() {
         //storing identifier into variable
         var toDelete = "#" + $(this).val();
         //adding to eaten area
-        var newDiv = $("div");
+        var newDiv = $("<div>");
         newDiv.addClass("col-sm-4 well");
         newDiv.append("<p>" + $(toDelete).text() + " </p>");
         burger.$eatenBurger.append(newDiv);
         //removing added burger
         $(toDelete).remove();
         //deleting the devour button.
-        $(this).remove();     
+        $(this).remove();
+        burger.$burgerName.append(newDiv);
 
     }
 };

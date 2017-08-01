@@ -41,6 +41,7 @@ module.exports = function(app) {
     });
   });
 
+
   app.post("/api/update", function(req, res) {
     console.log("the id is: "+ req.body.burger_id[0]);
     db.Burgers.update({
