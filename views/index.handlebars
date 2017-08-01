@@ -1,40 +1,39 @@
-<div class="jumbotron">
-    <h1 class="text-center">Burger Burger Burger!!!</h1>
-</div>
 <div class="container">
-  <div class="row">
-    {{#each burgers}}
-      {{#unless this.devoured}}
-    <div class="col-md-6 well">
-      <button class="btn btn-warning btn-md">{{this.id}}. {{this.burger_name}}</button>
+    <div class="jumbotron">
+        <h1 class="text-center">Burger Burger Burger!!!</h1>
     </div>
-     <div class="col-md-6 well">
-      <form action="/api/update" method="POST">
-            <input type="hidden" name="burger_id" type="text" value={{this.id}}>
-            <button type="submit" name="burger_id" class="btn btn-danger btn-md">Devour It!!!</button>
-      </form>
-    </div>
-     {{/unless}}
-    {{/each}}
-    <div class="col-md-12 well" text align="right">
-      {{#each burgers}}
-        {{#if this.devoured}}
-            <button class="btn btn-success btn-md">{{this.id}}. {{this.burger_name}}</button>
-        {{/if}}
-      {{/each}}
-    </div>
-  </div>
-</div>
+      <div class="row">
+        {{#each burgers}}
+          {{#unless this.devoured}}
+        <div class="col-md-6 well">
+          <button class="btn btn-warning btn-md">{{this.id}}. {{this.burger_name}}</button>
+        </div>
+         <div class="col-md-6 well">
+          <form action="/api/update" method="POST">
+                <input type="hidden" name="burger_id" type="text" value={{this.id}}>
+                <button type="submit" name="burger_id" class="btn btn-danger btn-md">Devour It!!!</button>
+          </form>
+        </div>
+         {{/unless}}
+        {{/each}}
+        <div text align="right">
+          {{#each burgers}}
+            {{#if this.devoured}}
+                <button class="btn btn-success btn-md">{{this.id}}. {{this.burger_name}}</button>
+            {{/if}}
+          {{/each}}
+        </div>
+      </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 text-center enter_section">
-      <form action="/api/create" method="POST">
-        <input type="text" name="burger_name" class="form-control">
-        <button type="submit" class="btn btn-md btn-primary" placeholder="Enter Your Favorite Burger...">
-          Submit
-        </button>
-      </form>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 text-center enter_section">
+          <form action="/api/create" method="POST">
+            <input type="text" name="burger_name" class="form-control" placeholder="Enter burger name ----!">
+            <br>
+            <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
 </div>
