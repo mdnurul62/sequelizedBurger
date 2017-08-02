@@ -1,3 +1,5 @@
+
+
 // reference standard lib sequelize
 var Sequelize = require("sequelize");
 // references our connection to the DB.

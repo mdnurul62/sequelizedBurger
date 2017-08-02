@@ -66,7 +66,7 @@ var burger = {
         var newDiv = $("<div>");
         newDiv.addClass("col-sm-4 well");
         newDiv.append("<p>" + $(toDelete).text() + " </p>");
-        burger.$eatenBurger.append(newDiv);
+        burger.$burgerName.append(newDiv);
         //removing added burger
         $(toDelete).remove();
         //deleting the devour button.
