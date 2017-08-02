@@ -1,14 +1,14 @@
 <div class="container">
     <div class="jumbotron">
-        <h1 class="text-center">Burger Burger Burger!!!</h1>
+        <h1 class="text-center">Eat Healthy Burger!</h1>
     </div>
-      <div class="row">
+    <div class="row">
         {{#each burgers}}
           {{#unless this.devoured}}
-        <div class="col-md-6 well">
+        <div class="col-md-4 well text-left">
           <button class="btn btn-warning btn-md">{{this.id}}. {{this.burger_name}}</button>
         </div>
-         <div class="col-md-6 well">
+         <div class="col-md-4 well text-center" >
           <form action="/api/update" method="POST">
                 <input type="hidden" name="burger_id" type="text" value={{this.id}}>
                 <button type="submit" name="burger_id" class="btn btn-danger btn-md">Devour It!!!</button>
@@ -16,15 +16,16 @@
         </div>
          {{/unless}}
         {{/each}}
-        <div text align="right">
+        <div class="col-md-4 well text-right">
           {{#each burgers}}
             {{#if this.devoured}}
-                <button class="btn btn-success btn-md">{{this.id}}. {{this.burger_name}}</button>
+                <ul>
+                <li><button class="btn btn-success btn-md">{{this.id}}. {{this.burger_name}}</button></li>
+                </ul>
             {{/if}}
           {{/each}}
         </div>
-      </div>
-
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-xs-12 text-center enter_section">

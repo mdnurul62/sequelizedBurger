@@ -17,12 +17,12 @@ var burger = {
         this.bindEvents();
     },
     cacheDom: function () {
-        this.$displayDiv = $("#displayDiv");
-        this.$burgerName = $("#burgerName");
-        this.$submitBtn = $("#submitBtn");
+        this.$displayDiv    = $("#displayDiv");
+        this.$burgerName    = $("#burgerName");
+        this.$submitBtn     = $("#submitBtn");
         this.$uneatenBurger = $("#uneatenBurger");
-        this.$btn = $("#btns");
-        this.$eatenBurger = $("#eatenBurger");
+        this.$btn           = $("#btns");
+        this.$eatenBurger   = $("#eatenBurger");
     },
     bindEvents: function () {
         this.$submitBtn.on("click", this.createBurger.bind(this));
